@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ADB App Install Guide</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #f1f1f1;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      padding: 20px;
+    }
+
+    h2, h3 {
+      color: #00bcd4;
+    }
+
+    a {
+      color: #4fc3f7;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    pre {
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+      position: relative;
+      margin-bottom: 25px;
+      font-size: 15px;
+      border-left: 4px solid #00bcd4;
+      box-shadow: 0 0 5px rgba(0, 188, 212, 0.2);
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+      display: block;
+    }
+
+    .cmd { color: #4fc3f7; }
+    .path { color: #81c784; }
+    .flag { color: #ffb74d; }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #00bcd4;
+      color: black;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background-color: #26c6da;
+    }
+
+    .note {
+      color: #ffab40;
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Shima, ADB ke through App Install Karne ka Asaan Tarika (Rooted Phone ke liye)</h2>
+  <p>Tumhare phone mein root hai, isliye bina PC ke hi ADB commands se app install kar sakti ho. Neeche diye gaye steps dhyan se follow karo:</p>
+
+  <h3>Step 1: Shizuku Install Karo</h3>
+  <ul>
+    <li>Play Store se <strong>Shizuku</strong> install karo.</li>
+    <li><a href="https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api" target="_blank">Install from Play Store</a></li>
+  </ul>
+
+  <h3>Step 2: AShell Install Karo</h3>
+  <ul>
+    <li>Play Store se <strong>AShell</strong> app install karo.</li>
+    <li><a href="https://play.google.com/store/apps/details?id=in.sunilpaulmathew.ashell" target="_blank">Install from Play Store</a></li>
+  </ul>
+
+  <h3>Step 3: Shizuku Start Karo</h3>
+  <ul>
+    <li>Shizuku app open karo.</li>
+    <li>"<strong>Start</strong>" button dabao. (Rooted phone hone ki wajah se direct start ho jaayega)</li>
+  </ul>
+
+  <h3>Step 4: AShell Open Karo aur Permission Do</h3>
+  <ul>
+    <li>AShell app open karo.</li>
+    <li>Jab Shizuku permission maange, allow kar dena.</li>
+  </ul>
+
+  <h3>Step 5: APK File Copy Karo (Command #1)</h3>
+  <pre><code id="cmd1"><span class="cmd">cp</span> <span class="path">"/storage/emulated/0/Download/CapCut v14.3.0 (Pro) (Login Required).apk"</span> <span class="path">/data/local/tmp/</span></code>
+    <button class="copy-btn" onclick="copyToClipboard('cmd1', this)">Copy</button>
+  </pre>
+
+  <h3>Step 6: APK Install Karo (Command #2)</h3>
+  <pre><code id="cmd2"><span class="cmd">pm install</span> <span class="flag">--user 12</span> <span class="path">"/data/local/tmp/CapCut v14.3.0 (Pro) (Login Required).apk"</span></code>
+    <button class="copy-btn" onclick="copyToClipboard('cmd2', this)">Copy</button>
+  </pre>
+
+  <p class="note"><strong>Note:</strong> Agar <code>--user 12</code> se kaam na chale to <code>--user 0</code> try karna</p>
+
+  <h3>Step 7: Wait Karo</h3>
+  <p>Command complete hone ke baad app install ho jaayega.</p>
+
+  <p><strong>Help chahiye ho to mujhe(ChatGPT) ya Raj se poochh lena.</strong></p>
+
+  <script>
+    function copyToClipboard(codeId, button) {
+      const code = document.getElementById(codeId).innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const original = button.innerText;
+        button.innerText = "Copied!";
+        setTimeout(() => {
+          button.innerText = original;
+        }, 1500);
+      }).catch(err => {
+        console.error("Copy failed:", err);
+        button.innerText = "Failed!";
+      });
+    }
+  </script>
+
+</body>
+</html>
